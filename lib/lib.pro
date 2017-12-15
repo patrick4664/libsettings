@@ -9,4 +9,4 @@ SOURCES = \
 
 HEADERS = \
 	settings.hh \
-	tinyxml2.hh
+    tinyxml2.h
