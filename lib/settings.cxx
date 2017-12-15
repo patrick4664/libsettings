@@ -31,61 +31,57 @@
 
 #include "settings.hh"
 #include "tinyxml2.h"
-#include "global/file_actions.hh"
 
+QString Settings::appName = "org.test.app";
 QString Settings::settingsPath = "";
+
 using namespace tinyxml2;
+
+void Settings::registerApp(QString app) {
+    appName = app;
+}
 
 #ifdef _WIN32
 //Windows path:
-//%USERPROFILE%\AppData\Local\CppEditor\settings.xml
+//%USERPROFILE%\AppData\Local\<app name>\settings.xml
 void Settings::initPaths() {
     settingsPath = QDir::homePath();
     if (!settingsPath.endsWith("\\")) {
         settingsPath+="\\";
     }
-    settingsPath+="AppData\\Local\\CppEditor";
+    settingsPath+="AppData\\Local\\"+appName;
     if (!QDir(settingsPath).exists()) {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="\\settings.xml";
-    if (!QFile(settingsPath).exists()) {
-        writeSettingsFile();
-    }
 }
 #elif HAIKU_OS
 //Haikus OS path:
-//$HOME/config/settings/CppEditor/settings.xml
+//$HOME/config/settings/<app name>/settings.xml
 void Settings::initPaths() {
     settingsPath = QDir::homePath();
     if (!settingsPath.endsWith("/")) {
         settingsPath+="/";
     }
-    settingsPath+="config/settings/CppEditor";
+    settingsPath+="config/settings/"+appName;
     if (!QDir(settingsPath).exists()) {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="/settings.xml";
-    if (!QFile(settingsPath).exists()) {
-        writeSettingsFile();
-    }
 }
 #else
 //UNIX path:
-//$HOME/.cpp-editor/settings.xml
+//$HOME/.<app name>/settings.xml
 void Settings::initPaths() {
     settingsPath = QDir::homePath();
     if (!settingsPath.endsWith("/")) {
         settingsPath+="/";
     }
-    settingsPath+=".cpp-editor";
+    settingsPath+="."+appName;
     if (!QDir(settingsPath).exists()) {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="/settings.xml";
-    if (!QFile(settingsPath).exists()) {
-        writeSettingsFile();
-    }
 }
 #endif
 
@@ -139,15 +135,6 @@ void Settings::writeSetting(QString id, QString attr, QString attrValue, QString
 
 void Settings::writeSetting(QString id, QString text) {
     Settings::writeSetting(id,nullptr, nullptr,text);
-}
-
-void Settings::writeSettingsFile() {
-    QFile file(settingsPath);
-    if (file.open(QFile::ReadWrite)) {
-        QTextStream writer(&file);
-        writer << FileActions::fileContents(":/rsc/settings_default.xml");
-        file.close();
-    }
 }
 
 XMLElement *Settings::getElement(XMLElement *root, QString path) {

@@ -33,6 +33,7 @@ using namespace tinyxml2;
 
 class Settings {
 public:
+    static void registerApp(QString app);
     static void initPaths();
     static QString getSetting(QString id, QString defaultSetting);
     static QString getAttributeSetting(QString id, QString attrID, QString defaultSetting);
@@ -40,6 +41,6 @@ public:
     static void writeSetting(QString id, QString text);
     static QString settingsPath;
 private:
-    static void writeSettingsFile();
+    static QString appName;
     static XMLElement *getElement(XMLElement *root, QString path);
 };
