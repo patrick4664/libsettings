@@ -3,6 +3,7 @@
 
 int main() {
     Settings::registerApp("settings.test");
+    Settings::setDefaultSettingsFile(":/settings.xml");
     Settings::initPaths();
 
     Settings::writeSetting("window/winX","600");

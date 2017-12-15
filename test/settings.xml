@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<settings>
+	<window>
+		<winX>453</winX>
+		<winY>545</winY>
+	</window>
+	<search>
+		<terms>
+			<history>blah</history>
+		</terms>
+	</search>
+	<base>sss
+		<attr attr1="blah"></attr>
+	</base>
+</settings>

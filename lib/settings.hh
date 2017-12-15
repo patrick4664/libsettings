@@ -35,12 +35,14 @@ class Settings {
 public:
     static void registerApp(QString app);
     static void initPaths();
+    static void setDefaultSettingsFile(QString dSettings);
     static QString getSetting(QString id, QString defaultSetting);
     static QString getAttributeSetting(QString id, QString attrID, QString defaultSetting);
     static void writeSetting(QString id, QString attr, QString attrValue, QString text);
     static void writeSetting(QString id, QString text);
     static QString settingsPath;
 private:
-    static QString appName;
+    static void writeSettingsFile();
+    static QString appName, defaultSettingsPath;
     static XMLElement *getElement(XMLElement *root, QString path);
 };

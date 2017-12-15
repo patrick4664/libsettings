@@ -6,3 +6,6 @@ LIBS+=-L../lib -lsettings
 INCLUDEPATH+=../lib
 
 SOURCES = main.cxx
+
+RESOURCES += \
+    rsc.qrc

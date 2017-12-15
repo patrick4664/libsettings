@@ -33,6 +33,7 @@
 #include "tinyxml2.h"
 
 QString Settings::appName = "org.test.app";
+QString Settings::defaultSettingsPath = "";
 QString Settings::settingsPath = "";
 
 using namespace tinyxml2;
@@ -54,6 +55,9 @@ void Settings::initPaths() {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="\\settings.xml";
+    if (!QFile(settingsPath).exists()) {
+        writeSettingsFile();
+    }
 }
 #elif HAIKU_OS
 //Haikus OS path:
@@ -68,6 +72,9 @@ void Settings::initPaths() {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="/settings.xml";
+    if (!QFile(settingsPath).exists()) {
+        writeSettingsFile();
+    }
 }
 #else
 //UNIX path:
@@ -82,8 +89,15 @@ void Settings::initPaths() {
         QDir().mkpath(settingsPath);
     }
     settingsPath+="/settings.xml";
+    if (!QFile(settingsPath).exists()) {
+        writeSettingsFile();
+    }
 }
 #endif
+
+void Settings::setDefaultSettingsFile(QString dSettings) {
+    defaultSettingsPath = dSettings;
+}
 
 QString Settings::getSetting(QString id, QString defaultSetting) {
     return getAttributeSetting(id,nullptr,defaultSetting);
@@ -168,4 +182,23 @@ XMLElement *Settings::getElement(XMLElement *root, QString path) {
         element = element->FirstChildElement(currentItem.toStdString().c_str());
     }
     return element;
+}
+
+void Settings::writeSettingsFile() {
+    QFile file(defaultSettingsPath);
+    QString content = "";
+    if (file.open(QFile::ReadOnly)) {
+        QTextStream reader(&file);
+        while (!reader.atEnd()) {
+            content+=reader.readLine();
+            file.close();
+        }
+    }
+
+    QFile file2(settingsPath);
+    if (file2.open(QFile::ReadWrite)) {
+        QTextStream writer(&file2);
+        writer << content;
+        file2.close();
+    }
 }
