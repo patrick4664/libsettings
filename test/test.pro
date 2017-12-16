@@ -28,7 +28,8 @@ QT += core widgets gui
 TEMPLATE=app
 CONFIG+=-std=c+11
 TARGET=testSettings
-LIBS+=-L../lib -lsettings
+unix:LIBS+=-L../lib -lsettings
+win32:LIBS+=-L../lib/debug -lsettings
 INCLUDEPATH+=../lib
 
 SOURCES = main.cxx
