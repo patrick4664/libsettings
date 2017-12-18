@@ -26,7 +26,7 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 QT = core
 TEMPLATE=lib
-CONFIG+=sharedlib -std=c+11
+CONFIG+=sharedlib c+11
 TARGET=settings
 
 SOURCES = \
