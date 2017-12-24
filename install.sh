@@ -35,7 +35,8 @@ cp ./libsettings.so.1 /usr/local/lib
 cp ./libsettings.so.1.0 /usr/local/lib
 cp ./libsettings.so.1.0.0 /usr/local/lib
 cd ../..
-cp lib/*.hh /usr/local/include
-cp lib/*.h /usr/local/include
+mkdir -p /usr/local/include/cpplib
+cp lib/*.hh /usr/local/include/cpplib
+cp lib/*.h /usr/local/include/cpplib
 ldconfig
 echo "Done!"
