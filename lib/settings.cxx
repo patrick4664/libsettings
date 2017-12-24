@@ -32,11 +32,12 @@
 #include "settings.hh"
 #include "tinyxml2.h"
 
+using namespace CppLib;
+using namespace tinyxml2;
+
 QString Settings::appName = "org.test.app";
 QString Settings::defaultSettingsPath = "";
 QString Settings::settingsPath = "";
-
-using namespace tinyxml2;
 
 void Settings::registerApp(QString app) {
     appName = app;

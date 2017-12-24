@@ -31,6 +31,8 @@
 #include "tinyxml2.h"
 using namespace tinyxml2;
 
+namespace CppLib {
+
 class Settings {
 public:
     static void registerApp(QString app);
@@ -46,3 +48,5 @@ private:
     static QString appName, defaultSettingsPath;
     static XMLElement *getElement(XMLElement *root, QString path);
 };
+
+}

@@ -27,6 +27,8 @@
 #include <iostream>
 #include <settings.hh>
 
+using namespace CppLib;
+
 int main() {
     Settings::registerApp("settings.test");
     Settings::setDefaultSettingsFile(":/settings.xml");
