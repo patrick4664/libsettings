@@ -26,8 +26,11 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 QT = core
 TEMPLATE=lib
-CONFIG+=sharedlib c+11
+CONFIG+=c+11
 TARGET=settings
+
+unix:CONFIG+=sharedlib
+win32:CONFIG+=staticlib
 
 SOURCES = \
 	settings.cxx \
