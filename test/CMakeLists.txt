@@ -10,6 +10,5 @@ add_executable(testSettings ${SRC})
 
 target_link_libraries(testSettings
 	Qt5::Core
-	Qt5::Widgets
 	settings
 )

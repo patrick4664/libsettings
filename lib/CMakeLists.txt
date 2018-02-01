@@ -10,5 +10,4 @@ add_library(settings SHARED ${SRC})
 
 target_link_libraries(settings
 	Qt5::Core
-	Qt5::Widgets
 )

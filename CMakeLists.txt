@@ -6,7 +6,6 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS
 	Core
-	Widgets
 )
 
 add_compile_options(-std=c++11)
